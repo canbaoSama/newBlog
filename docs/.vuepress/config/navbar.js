@@ -1,6 +1,10 @@
 module.exports = [
     {
-        text: '组件',
+        text: '首页',
+        link: '/'
+    },
+    {
+        text: '归档',
         link: '/components/'
     },
     {

@@ -1,1 +1,4 @@
-# Hello Components
+---
+pageType: list
+pageClass: list-page
+---
