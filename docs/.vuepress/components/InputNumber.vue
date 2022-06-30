@@ -1,11 +1,11 @@
 <template>
-  <a-input v-model:value="value" placeholder="Basic usage" />
+    <a-input v-model:value="value" placeholder="Basic usage" />
+    <a-button type="primary">点击查看</a-button>
 </template>
 <script setup>
-import { ref, defineProps } from "vue";
+import { ref, defineProps } from 'vue';
 const props = defineProps({
-  defaultValue:String
-})
+    defaultValue: String
+});
 const value = ref(props.defaultValue);
-
 </script>

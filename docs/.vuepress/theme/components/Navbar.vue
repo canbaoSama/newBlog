@@ -1,122 +1,98 @@
-<template>
-  <header class="navbar">
-    <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
+<!-- <template>
+    <header class="navbar">
+        <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
 
-    <router-link :to="$localePath" class="home-link">
-      <img
-        :alt="$siteTitle"
-        :src="$withBase($site.themeConfig.logo)"
-        class="logo"
-        v-if="$site.themeConfig.logo"
-      />
-      <span
-        :class="{ 'can-hide': $site.themeConfig.logo }"
-        class="site-name"
-        ref="siteName"
-        v-if="$siteTitle"
-      >{{ $siteTitle }}</span>
-    </router-link>
+        <router-link :to="$localePath" class="home-link">
+            <img :alt="$siteTitle" :src="$withBase($site.themeConfig.logo)" class="logo" v-if="$site.themeConfig.logo" />
+            <span :class="{ 'can-hide': $site.themeConfig.logo }" class="site-name" ref="siteName" v-if="$siteTitle">{{ $siteTitle }}</span>
+        </router-link>
 
-    <div
-      :style="linksWrapMaxWidth ? {
-        'max-width': linksWrapMaxWidth + 'px'
-      } : {}"
-      class="links"
-    >
-      <div @click="selectMode(currentMode == 'light' ? 'dark' : 'light')" class="color-button">
-        <i class="say-my-life-i say-my-life-i-yueliang" v-if="currentMode == 'light'"></i>
-        <i
-          class="say-my-life-i say-my-life-i-taiyang"
-          style="color:#fff"
-          v-if="currentMode == 'dark'"
-        ></i>
-      </div>
-      <AlgoliaSearchBox :options="algolia" v-if="isAlgoliaSearch" />
-      <SearchBox
-        v-else-if="$site.themeConfig.search !== false && $page.frontmatter.search !== false"
-      />
-      <NavLinks class="can-hide" />
-    </div>
-  </header>
+        <div
+            :style="
+                linksWrapMaxWidth
+                    ? {
+                          'max-width': linksWrapMaxWidth + 'px'
+                      }
+                    : {}
+            "
+            class="links"
+        >
+            <div @click="selectMode(currentMode == 'light' ? 'dark' : 'light')" class="color-button">
+                <i class="say-my-life-i say-my-life-i-yueliang" v-if="currentMode == 'light'"></i>
+                <i class="say-my-life-i say-my-life-i-taiyang" style="color: #fff" v-if="currentMode == 'dark'"></i>
+            </div>
+            <AlgoliaSearchBox :options="algolia" v-if="isAlgoliaSearch" />
+            <SearchBox v-else-if="$site.themeConfig.search !== false && $page.frontmatter.search !== false" />
+            <NavLinks class="can-hide" />
+        </div>
+    </header>
 </template>
 
 <script>
-import AlgoliaSearchBox from '@AlgoliaSearchBox'
-import SearchBox from '@SearchBox'
-import SidebarButton from '@theme/components/SidebarButton.vue'
-import NavLinks from '@theme/components/NavLinks.vue'
+import AlgoliaSearchBox from '@AlgoliaSearchBox';
+import SearchBox from '@SearchBox';
+import SidebarButton from '@theme/components/SidebarButton.vue';
+import NavLinks from '@theme/components/NavLinks.vue';
 
 export default {
-  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox },
+    components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox },
 
-  data() {
-    return {
-      linksWrapMaxWidth: null,
-      currentMode: 'light'
-    }
-  },
-
-  mounted() {
-    const MOBILE_DESKTOP_BREAKPOINT = 719 // refer to config.styl
-    const NAVBAR_VERTICAL_PADDING =
-      parseInt(css(this.$el, 'paddingLeft')) +
-      parseInt(css(this.$el, 'paddingRight'))
-    const handleLinksWrapWidth = () => {
-      if (document.documentElement.clientWidth < MOBILE_DESKTOP_BREAKPOINT) {
-        this.linksWrapMaxWidth = null
-      } else {
-        this.linksWrapMaxWidth =
-          this.$el.offsetWidth -
-          NAVBAR_VERTICAL_PADDING -
-          ((this.$refs.siteName && this.$refs.siteName.offsetWidth) || 0)
-      }
-    }
-    handleLinksWrapWidth()
-    window.addEventListener('resize', handleLinksWrapWidth, false)
-
-    this.currentMode =
-      localStorage.getItem('mode') != null
-        ? localStorage.getItem('mode')
-        : 'light'
-    this.selectMode(this.currentMode)
-  },
-
-  computed: {
-    algolia() {
-      return (
-        this.$themeLocaleConfig.algolia || this.$site.themeConfig.algolia || {}
-      )
+    data() {
+        return {
+            linksWrapMaxWidth: null,
+            currentMode: 'light'
+        };
     },
 
-    isAlgoliaSearch() {
-      return this.algolia && this.algolia.apiKey && this.algolia.indexName
-    }
-  },
-  methods: {
-    selectMode(currentMode) {
-      this.currentMode = currentMode
-      localStorage.setItem('mode', currentMode)
+    mounted() {
+        const MOBILE_DESKTOP_BREAKPOINT = 719; // refer to config.styl
+        const NAVBAR_VERTICAL_PADDING = parseInt(css(this.$el, 'paddingLeft')) + parseInt(css(this.$el, 'paddingRight'));
+        const handleLinksWrapWidth = () => {
+            if (document.documentElement.clientWidth < MOBILE_DESKTOP_BREAKPOINT) {
+                this.linksWrapMaxWidth = null;
+            } else {
+                this.linksWrapMaxWidth = this.$el.offsetWidth - NAVBAR_VERTICAL_PADDING - ((this.$refs.siteName && this.$refs.siteName.offsetWidth) || 0);
+            }
+        };
+        handleLinksWrapWidth();
+        window.addEventListener('resize', handleLinksWrapWidth, false);
 
-      if (currentMode == 'dark') {
-        document
-          .querySelectorAll('#app')[0]
-          .setAttribute('class', 'theme--dark')
-      } else {
-        document.querySelectorAll('#app')[0].setAttribute('class', '')
-      }
+        this.currentMode = localStorage.getItem('mode') != null ? localStorage.getItem('mode') : 'light';
+        this.selectMode(this.currentMode);
+    },
+
+    computed: {
+        algolia() {
+            return this.$themeLocaleConfig.algolia || this.$site.themeConfig.algolia || {};
+        },
+
+        isAlgoliaSearch() {
+            return this.algolia && this.algolia.apiKey && this.algolia.indexName;
+        }
+    },
+    methods: {
+        selectMode(currentMode) {
+            this.currentMode = currentMode;
+            localStorage.setItem('mode', currentMode);
+
+            if (currentMode == 'dark') {
+                document.querySelectorAll('#app')[0].setAttribute('class', 'theme--dark');
+            } else {
+                document.querySelectorAll('#app')[0].setAttribute('class', '');
+            }
+        }
     }
-  }
-}
+};
 
 function css(el, property) {
-  // NOTE: Known bug, will return 'auto' if style value is 'auto'
-  const win = el.ownerDocument.defaultView
-  // null means not to return pseudo styles
-  return win.getComputedStyle(el, null)[property]
+    // NOTE: Known bug, will return 'auto' if style value is 'auto'
+    const win = el.ownerDocument.defaultView;
+    // null means not to return pseudo styles
+    return win.getComputedStyle(el, null)[property];
 }
 </script>
 
-<style lang="stylus">
+<style lang="scss">
 $navbar-vertical-padding = 0.7rem;
 $navbar-horizontal-padding = 1.5rem;
 
@@ -230,4 +206,4 @@ $navbar-horizontal-padding = 1.5rem;
     }
   }
 }
-</style>
+</style> -->
