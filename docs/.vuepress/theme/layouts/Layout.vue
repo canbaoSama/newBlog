@@ -1,5 +1,6 @@
 <template>
-    <Home />
+    <!-- <Home /> -->
+    <NavLinks class="can-hide" />
     <ParentLayout>
         <!-- <template #navbar>
             <Navbar />
@@ -18,6 +19,7 @@
 import ParentLayout from '@vuepress/theme-default/lib/client/layouts/Layout.vue';
 import Navbar from '../components/Navbar.vue';
 import Home from '../components/Home.vue';
+
 </script>
 
 <style lang="css">
