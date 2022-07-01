@@ -8,35 +8,23 @@
     </div>
 
     <main class="content-wrap">
-        <div class="center-content">
-            <div v-for="article in articleList" :key="article.title" class="card-wrap">
-                <p class="title">{{ article.title }}</p>
-                <div class="tag-date">
-                    <div class="tag">
-                        <a-tag color="#2db7f5">置顶</a-tag>
-                        <a-tag v-for="item in article.tag" :key="item" :class="`${blogJson[item]}`">{{ item }}</a-tag>
-                    </div>
-                    <span>{{ dayjs(article.date).format("YYYY-MM-DD") }}</span>
-                </div>
-            </div>
-        </div>
-        <!-- 
+        <ArticleList />
+
+
         <aside class="right-aside">
             <div class="card-wrap card-info">
                 <div class="avatar-info">
-                    <el-avatar :size="80">
-                        <img src="https://s2.loli.net/2022/06/23/RmpxzgfeTXL9K7k.jpg" />
-                    </el-avatar>
+                    <a-avatar :size="80" src="https://s2.loli.net/2022/06/23/RmpxzgfeTXL9K7k.jpg" />
                     <p>有机猴灬残暴Sama</p>
                 </div>
                 <div class="data-info">
-                    <div @click="$router.push('/blog/Archives.html')" class="data-info-item">
+                    <div @click="routerLink('/components')" class="data-info-item">
                         <p class="data-info-item-title">文章</p>
-                        <p class="data-info-item-data">{{ blogInfo.blog.length }}</p>
+                        <p class="data-info-item-data">4</p>
                     </div>
                     <div class="data-info-item">
                         <p class="data-info-item-title">标签</p>
-                        <p class="data-info-item-data">{{ blogInfo.tag.length }}</p>
+                        <p class="data-info-item-data">11</p>
                     </div>
                 </div>
                 <div @click="addBookMark" class="add-bookmark">
@@ -45,17 +33,17 @@
                 </div>
                 <div class="social-info">
                     <a href="https://github.com/canbaoSama">
-                        <i class="shni shn-github-fill"></i>
+                        <i class="iconfont icon-github"></i>
                     </a>
-                    <i @click="openAlipay" class="shni shn-alipay-circle-fill"></i>
-                    <i @click="openQQ" class="shni shn-QQ"></i>
-                    <i @click="openWechat" class="shni shn-wechat-fill"></i>
+                    <i @click="openAlipay" class="iconfont icon-imagezhifubao"></i>
+                    <i @click="openQQ" class="iconfont icon-QQ"></i>
+                    <i @click="openWechat" class="iconfont icon-weixin"></i>
                     <a href="mailto:2430980019@qq.com">
-                        <i class="shni shn-mail-fill"></i>
+                        <i class="iconfont icon-youxiang"></i>
                     </a>
                 </div>
             </div>
-
+            <!-- 
             <div class="card-wrap card-love">
                 <div class="avatar-info">
                     <img src="https://s2.loli.net/2022/06/23/M1P7YozxsNnklfD.jpg" />
@@ -88,14 +76,18 @@
                 <base-tag :data="item" :key="'tag-' + index + item.name" @click="tagClick(item.name)"
                     style="margin-right: 10px; margin-top: 10px; cursor: pointer"
                     v-for="(item, index) in blogInfo.tag" />
-            </div>
-        </aside> -->
+            </div> -->
+        </aside>
     </main>
 </template>
 <script setup>
-import blogJson from "../../blogJson";
-import { ref } from 'vue';
-import dayjs from 'dayjs';
+import ArticleList from '../components/ArticleList.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const routerLink = (url) => {
+    router.push(url);
+}
 
 // banner 背景图片
 const bgList = [
@@ -106,9 +98,6 @@ const bgList = [
     "rMNdqIjAXGEsopY",
 ];
 const bannerBg = bgList[Math.floor(Math.random() * 5)];
-
-const articleList = ref(blogJson.blog.splice(0, 10));
-
 </script>
 <style lang="scss" scoped>
 .home-page {
@@ -158,37 +147,84 @@ const articleList = ref(blogJson.blog.splice(0, 10));
         margin: 0 auto;
         padding: 30px 24px;
         display: flex;
+    }
 
-        .center-content {
-            width: calc(75% - 15px);
+    .right-aside {
+        width: 25%;
+        margin-left: 15px;
 
-            .card-wrap {
-                padding: 1rem 1.2rem;
-                border-radius: 8px;
-                background: #fff;
-                transition: all .3s;
+        .card-wrap {
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            background: #fff;
+            transition: all 0.3s;
 
-                &:not(:first-child) {
-                    margin-top: 20px;
+            &:not(:first-child) {
+                margin-top: 20px;
+            }
+
+            &.card-info {
+                color: #333;
+
+                .avatar-info {
+                    text-align: center;
+                    font-weight: 600;
                 }
 
-                .title {
-                    font-size: 18px;
-                    color: rgba(0, 0, 0, .87);
-                    line-height: 1.5;
-                    display: block;
-                    margin-bottom: 4px;
-                }
-
-                .tag-date {
+                .data-info {
                     display: flex;
-                    align-items: center;
+                    padding: 0.7rem 0;
+                    text-align: center;
+
+                    .data-info-item {
+                        cursor: pointer;
+                        flex: 1;
+
+                        .data-info-item-data {
+                            font-size: 1rem;
+                            font-weight: 600;
+                        }
+                    }
+                }
+
+                .add-bookmark {
+                    cursor: pointer;
+                    background-color: #333;
+                    color: #fff;
+                    line-height: 2rem;
+                    text-align: center;
+                    font-size: 14px;
+                    transition: all 0.3s ease;
+
+                    i {
+                        position: relative;
+                        top: 1px;
+                    }
+
+                    &:hover {
+                        background: #3eaf7c;
+                    }
+                }
+
+                .social-info {
+                    padding: 1rem 1.5rem;
+                    display: flex;
                     justify-content: space-between;
+
+                    i {
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        font-size: 26px;
+                        color: #333;
+
+                        &:hover {
+                            color: #3eaf7c;
+                        }
+                    }
                 }
             }
         }
     }
-
 }
 
 @media screen and (orientation: portrait) and (max-width: 720px) {
@@ -197,6 +233,22 @@ const articleList = ref(blogJson.blog.splice(0, 10));
             img {
                 display: none;
             }
+        }
+    }
+}
+</style>
+<style lang="scss">
+.avatar-info {
+    img {
+        transform: none;
+        cursor: pointer;
+
+        &:hover {
+            transform: rotate(666turn);
+            transition-delay: 1s;
+            transition-property: all;
+            transition-duration: 59s;
+            transition-timing-function: cubic-bezier(0.34, 0, 0.84, 1);
         }
     }
 }

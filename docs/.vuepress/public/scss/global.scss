@@ -1,0 +1,51 @@
+body {
+    font-size: 16px;
+}
+
+p {
+    margin: 0;
+}
+
+.public-tag {
+    color: #fff;
+    border-radius: 4px;
+    i {
+        margin-right: 4px;
+    }
+    &::before {
+        margin-right: 4px;
+    }
+}
+.public-tag-vue {
+    background-color:  #42b983;
+}
+.public-tag-css {
+    background-color:  #ef8808;
+}
+.public-tag-javascript {
+    background-color:  #87d068;
+}
+.public-tag-applets {
+    background-color:  #108ee9;
+}
+.public-tag-vuepress {
+    background-color:  #0a9f46;
+}
+.public-tag-info {
+    background-color:  #8b8786;
+}
+.public-tag-music {
+    background-color:  #e6a23c;
+}
+.public-tag-anecdote {
+    background-color:  #25bbcb;
+}
+.public-tag-movie {
+    background-color:  #8e44ad;
+}
+.public-tag-git {
+    background-color:  #f50;
+}
+.public-tag-tool {
+    background-color:  #d52104;
+}
