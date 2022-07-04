@@ -4,7 +4,7 @@
             <p class="title">{{ article.title }}</p>
             <div class="tag-date">
                 <div class="tag">
-                    <a-tag class="public-tag" color="#000"><i class="iconfont icon-zhiding"></i>置顶</a-tag>
+                    <a-tag class="public-tag public-tag-top" color="#000"><i class="iconfont icon-zhiding"></i>置顶</a-tag>
                     <a-tag v-for="sigTag in article.tag" :key="tag" class="public-tag" :class="`public-tag-${tag[sigTag].type} ${tag[sigTag].icon}`">{{ sigTag }}</a-tag>
                 </div>
                 <span>{{ dayjs(article.date).format('YYYY-MM-DD') }}</span>

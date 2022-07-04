@@ -1,3 +1,5 @@
+@import url('./animate.scss');
+
 body {
     font-size: 16px;
 }
@@ -9,12 +11,17 @@ p {
 .public-tag {
     color: #fff;
     border-radius: 4px;
+    height: 22px;
+    display: inline-block;
     i {
         margin-right: 4px;
     }
     &::before {
         margin-right: 4px;
     }
+}
+.public-tag-top {
+    margin-right: 24px;
 }
 .public-tag-vue {
     background-color:  #42b983;
@@ -48,4 +55,17 @@ p {
 }
 .public-tag-tool {
     background-color:  #d52104;
+}
+
+// 通知框样式
+.ant-notification-notice {
+    background: #3eaf7c;
+    border-radius: 8px;
+    .ant-notification-notice-message {
+        color: #fff;
+        margin: 0;
+    }
+    .ant-notification-notice-close {
+        color: #fff;
+    }
 }
