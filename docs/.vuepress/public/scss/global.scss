@@ -69,3 +69,38 @@ p {
         color: #fff;
     }
 }
+
+// 滚动条
+.phone-scrollbar {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.phone-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: transparent;
+}
+.phone-scrollbar::-webkit-scrollbar-thumb:vertical {
+    border-right: 4px solid rgba(255, 255, 255, 0);
+    height: 50px;
+    background-color: rgba(144,147,153,0.5);
+    background-clip: content-box;
+    border-radius: 2px;
+}
+.phone-scrollbar::-webkit-scrollbar-thumb:horizontal {
+    border-bottom: 4px solid rgba(255, 255, 255, 0);
+    width: 50px;
+    background-color: rgba(144,147,153,0.5);;
+    background-clip: content-box;
+    border-radius: 2px;
+}
+.phone-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.phone-scrollbar::-webkit-scrollbar-button:end:increment,
+.phone-scrollbar::-webkit-scrollbar-button:start:decrement {
+    display: block;
+    width: 0;
+    height: 0;
+    background-color: transparent;
+}

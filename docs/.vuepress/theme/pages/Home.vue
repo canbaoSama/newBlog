@@ -49,7 +49,8 @@
                     <a-image width="100%" src="https://s2.loli.net/2022/06/23/M1P7YozxsNnklfD.jpg" />
                     <i class="iconfont icon-keaide"></i>
                 </div>
-                <p>{{ loveInfo.daysNum }} 天 {{ loveInfo.hoursNum }} 时 {{ loveInfo.minutesNum }} 分 {{ loveInfo.secondsNum }} 秒 </p>
+                <p>{{ loveInfo.daysNum }} 天 {{ loveInfo.hoursNum }} 时 {{ loveInfo.minutesNum }} 分 {{ loveInfo.secondsNum
+                }} 秒 </p>
             </div>
 
             <div class="card-wrap card-carousel">
@@ -65,7 +66,9 @@
             </div>
 
             <div class="card-wrap card-tag">
-                <a-tag v-for="sigTag in tag" :key="tag" class="public-tag" :class="`public-tag-${sigTag.type} ${sigTag.icon}`" @click="tagClick(sigTag.name)">{{ sigTag.name }}</a-tag>
+                <a-tag v-for="sigTag in tag" :key="tag" class="public-tag"
+                    :class="`public-tag-${sigTag.type} ${sigTag.icon}`" @click="tagClick(sigTag.name)">{{ sigTag.name }}
+                </a-tag>
             </div>
         </aside>
     </main>
@@ -361,10 +364,33 @@ const openAlipay = () => {
 }
 
 @media screen and (orientation: portrait) and (max-width: 720px) {
-    .index-wrap {
+    .home-page {
         .banner-wrap {
             img {
                 display: none;
+            }
+        }
+
+        .content-wrap {
+            display: inline-flex;
+            flex-direction: column;
+            width: 100%;
+            padding-top: 0;
+
+            .article-content {
+                order: 1;
+            }
+
+            .right-aside {
+                order: -1;
+            }
+
+            .article-content,
+            .right-aside {
+                display: block;
+                width: 100%;
+                margin-left: 0;
+                margin-top: 20px;
             }
         }
     }
