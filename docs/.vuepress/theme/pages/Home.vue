@@ -66,12 +66,18 @@
             </div>
 
             <div class="card-wrap card-tag">
-                <a-tag v-for="sigTag in tag" :key="tag" class="public-tag"
-                    :class="`public-tag-${sigTag.type} ${sigTag.icon}`" @click="tagClick(sigTag.name)">{{ sigTag.name }}
+                <a-tag v-for="sigTag in tag" :key="tag" class="public-tag" :class="`public-tag-${sigTag.type} ${sigTag.icon}`" @click="tagClick(sigTag.name)">{{ sigTag.name }}
                 </a-tag>
             </div>
         </aside>
     </main>
+
+    <footer class="footer-wrap">
+        <div class="copyright" data-v-2a4e91bd="">©2022 - 2122 By canbaoSama</div>
+        <div class="framework-info">
+            Power by&nbsp;&nbsp;<a href="https://vuepress.vuejs.org/zh/" rel="noopener" target="_blank" data-v-2a4e91bd="">Vuepress</a>
+        </div>
+    </footer>
 </template>
 <script setup>
 import ArticleList from '../components/ArticleList.vue';
@@ -212,6 +218,7 @@ const openAlipay = () => {
                 margin-top: 8px;
                 font-size: 1.2rem;
                 color: #d7d7d7;
+                padding: 0 16px;
             }
         }
 
@@ -229,136 +236,147 @@ const openAlipay = () => {
         margin: 0 auto;
         padding: 30px 24px;
         display: flex;
-    }
 
-    .right-aside {
-        width: 25%;
-        margin-left: 15px;
+        .right-aside {
+            width: 25%;
+            margin-left: 15px;
 
-        .card-wrap {
-            padding: 1rem 1.2rem;
-            border-radius: 8px;
-            background: #fff;
-            transition: all 0.3s;
+            .card-wrap {
+                padding: 1rem 1.2rem;
+                border-radius: 8px;
+                background: #fff;
+                transition: all 0.3s;
 
-            &:not(:first-child) {
-                margin-top: 20px;
-            }
-
-            &.card-info {
-                color: #333;
-
-                .avatar-info {
-                    text-align: center;
-                    font-weight: 600;
+                &:not(:first-child) {
+                    margin-top: 20px;
                 }
 
-                .data-info {
-                    display: flex;
-                    padding: 0.7rem 0;
-                    text-align: center;
+                &.card-info {
+                    color: #333;
 
-                    .data-info-item {
-                        cursor: pointer;
-                        flex: 1;
+                    .avatar-info {
+                        text-align: center;
+                        font-weight: 600;
+                    }
 
-                        .data-info-item-data {
-                            font-size: 1rem;
-                            font-weight: 600;
+                    .data-info {
+                        display: flex;
+                        padding: 0.7rem 0;
+                        text-align: center;
+
+                        .data-info-item {
+                            cursor: pointer;
+                            flex: 1;
+
+                            .data-info-item-data {
+                                font-size: 1rem;
+                                font-weight: 600;
+                            }
                         }
                     }
-                }
 
-                .add-bookmark {
-                    cursor: pointer;
-                    background-color: #333;
-                    color: #fff;
-                    line-height: 2rem;
-                    text-align: center;
-                    font-size: 14px;
-                    transition: all 0.3s ease;
-
-                    i {
-                        position: relative;
-                        top: 1px;
-                    }
-
-                    &:hover {
-                        background: #3eaf7c;
-                    }
-                }
-
-                .social-info {
-                    padding: 1rem 1.5rem;
-                    display: flex;
-                    justify-content: space-between;
-
-                    i {
+                    .add-bookmark {
                         cursor: pointer;
+                        background-color: #333;
+                        color: #fff;
+                        line-height: 2rem;
+                        text-align: center;
+                        font-size: 14px;
                         transition: all 0.3s ease;
-                        font-size: 26px;
-                        color: #333;
+
+                        i {
+                            position: relative;
+                            top: 1px;
+                        }
 
                         &:hover {
-                            color: #3eaf7c;
+                            background: #3eaf7c;
                         }
                     }
-                }
-            }
 
-            &.card-love {
-                text-align: center;
+                    .social-info {
+                        padding: 1rem 1.5rem;
+                        display: flex;
+                        justify-content: space-between;
 
-                .avatar-info {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    position: relative;
-                    flex-wrap: wrap;
-
-                    img {
-                        width: 100%;
-                        display: block;
-                    }
-
-                    i {
-                        display: block;
-                        margin-top: 10px;
-                        color: #f56c6c;
-                        font-size: 18px;
-                        animation: xintiao 1.33s ease-in-out infinite;
-                    }
-                }
-            }
-
-
-            &.card-carousel {
-                padding: 0 0;
-                overflow: hidden;
-
-                .card-carousel-item {
-                    position: relative;
-                    width: 100%;
-                    height: 300px;
-
-                    .carousel-des {
-                        position: absolute;
-                        bottom: 0;
-                        padding: 2rem 1.4rem;
-
-                        h2 {
-                            color: #fff;
+                        i {
+                            cursor: pointer;
+                            transition: all 0.3s ease;
                             font-size: 26px;
-                            padding-bottom: 0.5rem;
+                            color: #333;
+
+                            &:hover {
+                                color: #3eaf7c;
+                            }
+                        }
+                    }
+                }
+
+                &.card-love {
+                    text-align: center;
+
+                    .avatar-info {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: relative;
+                        flex-wrap: wrap;
+
+                        img {
+                            width: 100%;
+                            display: block;
                         }
 
-                        p {
-                            color: #fff;
-                            font-size: 14px;
+                        i {
+                            display: block;
+                            margin-top: 10px;
+                            color: #f56c6c;
+                            font-size: 18px;
+                            animation: xintiao 1.33s ease-in-out infinite;
+                        }
+                    }
+                }
+
+
+                &.card-carousel {
+                    padding: 0 0;
+                    overflow: hidden;
+
+                    .card-carousel-item {
+                        position: relative;
+                        width: 100%;
+                        height: 300px;
+
+                        .carousel-des {
+                            position: absolute;
+                            bottom: 0;
+                            padding: 2rem 1.4rem;
+
+                            h2 {
+                                color: #fff;
+                                font-size: 26px;
+                                padding-bottom: 0.5rem;
+                            }
+
+                            p {
+                                color: #fff;
+                                font-size: 14px;
+                            }
                         }
                     }
                 }
             }
+        }
+    }
+
+    .footer-wrap {
+        background: #000;
+        padding: 24px;
+        color: white;
+
+        .copyright,
+        .framework-info {
+            text-align: center;
         }
     }
 }
@@ -408,6 +426,40 @@ const openAlipay = () => {
             transition-property: all;
             transition-duration: 59s;
             transition-timing-function: cubic-bezier(0.34, 0, 0.84, 1);
+        }
+    }
+}
+
+.home-page {
+    .navbar:not(.home-navbar-scroll) {
+        background: transparent;
+        color: #fff;
+        border: none;
+
+        &>span {
+            opacity: 0;
+        }
+
+        .navbar-item {
+            .router-link-active {
+                color: #fff;
+
+                .router-link-exact-active {
+                    color: #fff;
+                }
+            }
+
+            .navbar-dropdown-title {
+                color: #fff;
+            }
+
+            .navbar-dropdown {
+                color: #000;
+            }
+        }
+
+        .toggle-color-mode-button {
+            color: #fff;
         }
     }
 }

@@ -9,8 +9,8 @@ const { backToTopPlugin } = require('@vuepress/plugin-back-to-top');
 module.exports = {
     // 站点配置
     lang: 'zh-CN',
-    title: 'UI-LIB',
-    description: '组件库',
+    title: '有机猴灬残暴Sama',
+    description: '有机猴灬残暴Sama的个人博客',
     head: [
         // 注入到当前页面的 HTML <head> 中的标签
         [
@@ -29,7 +29,7 @@ module.exports = {
             componentsDir: path.resolve(__dirname, './components')
         }),
         searchPlugin({}),
-        backToTopPlugin(),
+        backToTopPlugin()
     ],
     // 主题和它的配置
     theme: localTheme({

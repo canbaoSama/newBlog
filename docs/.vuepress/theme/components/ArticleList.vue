@@ -6,8 +6,7 @@
                 <div class="tag">
                     <a-tag class="public-tag public-tag-top" color="#000"><i class="iconfont icon-zhiding"></i>置顶
                     </a-tag>
-                    <a-tag v-for="sigTag in article.tag" :key="tag" class="public-tag"
-                        :class="`public-tag-${tag[sigTag].type} ${tag[sigTag].icon}`">{{ sigTag }}</a-tag>
+                    <a-tag v-for="sigTag in article.tag" :key="tag" class="public-tag" :class="`public-tag-${tag[sigTag].type} ${tag[sigTag].icon}`">{{ sigTag }}</a-tag>
                 </div>
                 <span>{{ dayjs(article.date).format('YYYY-MM-DD') }}</span>
             </div>
@@ -20,10 +19,17 @@
 import blogJson from '../../blogJson.json';
 import { ref, onUnmounted } from 'vue';
 import dayjs from 'dayjs';
+import { inject } from 'vue';
+
+const pageFm = inject('pageFm');
 
 const tag = ref(blogJson.tag);
-const initBlog = ref(blogJson.blog);
+const initBlog = ref(blogJson.blog.concat([]));
 const articleList = ref(initBlog.value.splice(0, 10));
+
+const pageChange = () => {
+    articleList.value = articleList.value.concat(initBlog.value.splice(0, 10));
+}
 
 const scrollEvent = () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -36,16 +42,18 @@ const scrollEvent = () => {
 
     globalScrollTop.value = scrollTop;
 
+    if (pageFm.value.pageType === 'home') {
+        if (scrollTop > 60) {
+            document.querySelectorAll(".home-page .navbar")[0].setAttribute("class", "navbar home-navbar-scroll");
+        } else {
+            document.querySelectorAll(".home-page .navbar")[0].setAttribute("class", "navbar");
+        }
+    }
+
     if (thresold > -50 && thresold <= 100) {
         if (initBlog.value.length != 0) {
             pageChange();
         }
-    }
-}
-const pageChange = () => {
-    articleList.value = articleList.value.concat(initBlog.value.splice(0, 10));
-    if (initBlog.value.length === 0) {
-        window.removeEventListener('scroll', scrollEvent);
     }
 }
 
@@ -82,6 +90,11 @@ onUnmounted(() => {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            color: #686868;
+
+            .tag {
+                flex: 1;
+            }
         }
     }
 

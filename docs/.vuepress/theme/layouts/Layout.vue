@@ -1,6 +1,6 @@
 <template>
     <!-- <Home /> -->
-    <NavLinks class="can-hide" />
+    <!-- <NavLinks class="can-hide" /> -->
 
     <ParentLayout>
         <!-- <template #navbar>
@@ -20,8 +20,10 @@ import ParentLayout from '@vuepress/theme-default/lib/client/layouts/Layout.vue'
 import Navbar from '../components/Navbar.vue';
 import Home from '../pages/Home.vue';
 import { usePageFrontmatter } from '@vuepress/client';
+import { provide } from 'vue';
 
 const pageFm = usePageFrontmatter();
+provide('pageFm', pageFm)
 </script>
 <style lang="scss" scoped>
 .home-page {

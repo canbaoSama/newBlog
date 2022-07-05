@@ -2,6 +2,7 @@
 
 body {
     font-size: 16px;
+    color: unset;
 }
 
 p {
@@ -103,4 +104,17 @@ p {
     width: 0;
     height: 0;
     background-color: transparent;
+}
+
+// logo
+.navbar {
+    display: flex;
+    align-items: center;
+    .router-link-active.router-link-exact-active {
+        display: flex;
+        align-items: center;
+        .logo {
+            height: 1.4rem;
+        }
+    }
 }
