@@ -117,4 +117,7 @@ p {
             height: 1.4rem;
         }
     }
+    .navbar-items a:hover, .navbar-items a.router-link-active {
+        color: #fff;
+    }
 }

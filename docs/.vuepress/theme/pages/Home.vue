@@ -66,7 +66,8 @@
             </div>
 
             <div class="card-wrap card-tag">
-                <a-tag v-for="sigTag in tag" :key="tag" class="public-tag" :class="`public-tag-${sigTag.type} ${sigTag.icon}`" @click="tagClick(sigTag.name)">{{ sigTag.name }}
+                <a-tag v-for="sigTag in tag" :key="tag" class="public-tag"
+                    :class="`public-tag-${sigTag.type} ${sigTag.icon}`" @click="tagClick(sigTag.name)">{{ sigTag.name }}
                 </a-tag>
             </div>
         </aside>
@@ -75,7 +76,8 @@
     <footer class="footer-wrap">
         <div class="copyright" data-v-2a4e91bd="">©2022 - 2122 By canbaoSama</div>
         <div class="framework-info">
-            Power by&nbsp;&nbsp;<a href="https://vuepress.vuejs.org/zh/" rel="noopener" target="_blank" data-v-2a4e91bd="">Vuepress</a>
+            Power by&nbsp;&nbsp;<a href="https://vuepress.vuejs.org/zh/" rel="noopener" target="_blank"
+                data-v-2a4e91bd="">Vuepress</a>
         </div>
     </footer>
 </template>
@@ -157,6 +159,13 @@ const tagClick = (name) => {
     routerLink('blog/Tag.html', { tag: name });
 };
 
+const addBookMark = () => {
+    notification.open({
+        message: '按 CTRL + D 将本页加入书签',
+        placement: 'bottomLeft',
+        duration: 2,
+    });
+};
 // 打开QQ 
 const openQQ = () => {
     notification.open({
