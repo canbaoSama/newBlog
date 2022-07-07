@@ -16,6 +16,16 @@ p {
     margin: 0;
 }
 
+// 公共样式
+.blog-container {
+    padding: 30px 24px;
+}
+@media screen and (orientation: portrait) and (max-width: 720px) {
+    .blog-container {
+        width: 100%;
+    }
+}
+
 // 标签
 .public-tag {
     color: #fff;

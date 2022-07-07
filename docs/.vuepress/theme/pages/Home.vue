@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <main class="content-wrap">
+    <main class="content-wrap blog-container">
         <ArticleListLoad />
 
 
@@ -72,8 +72,7 @@
     <footer class="footer-wrap">
         <div class="copyright" data-v-2a4e91bd="">©2022 - 2122 By canbaoSama</div>
         <div class="framework-info">
-            Power by&nbsp;&nbsp;<a href="https://vuepress.vuejs.org/zh/" rel="noopener" target="_blank"
-                data-v-2a4e91bd="">Vuepress</a>
+            Power by&nbsp;&nbsp;<a href="https://vuepress.vuejs.org/zh/" rel="noopener" target="_blank" data-v-2a4e91bd="">Vuepress</a>
         </div>
     </footer>
 </template>
@@ -238,7 +237,6 @@ const openAlipay = () => {
     .content-wrap {
         width: 1200px;
         margin: 0 auto;
-        padding: 30px 24px;
         display: flex;
 
         .right-aside {
@@ -396,7 +394,6 @@ const openAlipay = () => {
         .content-wrap {
             display: inline-flex;
             flex-direction: column;
-            width: 100%;
             padding-top: 0;
 
             .article-content {

@@ -12,7 +12,11 @@ import { ref, inject } from 'vue';
 import { useRouter } from 'vue-router';
 import { getCookieFeild } from '../../public/js/utils.js'
 
-const tagName = ref(getCookieFeild('tagName'));
+const props = defineProps({
+    tagName: String
+});
+
+const tagName = ref(props.tagName);
 const emits = defineEmits(['updateTagName']);
 
 const router = useRouter();
@@ -21,11 +25,11 @@ const tag = ref(blogJson.tag);
 
 // 点击跳转标签页
 const tagClick = (name) => {
-    document.cookie = `tagName=${name};path=/`;
     tagName.value = name;
     if (pageFm.value.pageType === 'tagPage') { // 本页
-        emits('updateTagName');
+        emits('updateTagName', name);
     } else {
+        document.cookie = `tagName=${name};path=/`;
         router.push({ path: '/blog/tagPage' });
     }
 };

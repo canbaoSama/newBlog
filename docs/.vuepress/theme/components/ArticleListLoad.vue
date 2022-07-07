@@ -71,10 +71,9 @@ onUnmounted(() => {
 const articleSearch = (val) => {
     initBlog = [];
     articleList.value = [];
-    if (val === '全部') {
+    if (val === '全部' || !val) {
         initBlog = blogJson.blog.concat([]);
         articleList.value = initBlog.splice(0, initBlog.length > 10 ? 10 : initBlog.length);
-        // articleList.value = blogJson.blog.concat([]);
     } else {
         blogJson.blog.forEach(item => {
             if (item.tag.indexOf(val) > -1) {
