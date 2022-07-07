@@ -7,8 +7,8 @@ body {
 
 .theme-container {
     background-color: #f4f4f4;
-    &:not(.home) {
-        padding-top: 58px;
+    &:not(.home-page) {
+        padding: 58px 0;
     }
 }
 
@@ -29,6 +29,12 @@ p {
     &::before {
         margin-right: 4px;
     }
+}
+.public-tag-all {
+    margin-right: 8px;
+    border-color: #000;
+    color: #fff;
+    background-color: #000;
 }
 .public-tag-top {
     margin-right: 24px;

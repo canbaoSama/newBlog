@@ -641,15 +641,7 @@
     "@vuepress/utils" "2.0.0-beta.48"
     chokidar "^3.5.3"
 
-"@vuepress/plugin-prismjs@2.0.0-beta.48":
-  version "2.0.0-beta.48"
-  resolved "https://registry.npmjs.org/@vuepress/plugin-prismjs/-/plugin-prismjs-2.0.0-beta.48.tgz"
-  integrity sha512-xTdk3DEJmzuzeRcm0fZfJFLs6/oN2T/sm+KtSh7whVbHcgEKFdj0vHkiWswp3bnNWE3FHUwO1UQq9K21zEwpUw==
-  dependencies:
-    "@vuepress/core" "2.0.0-beta.48"
-    prismjs "^1.28.0"
-
-"@vuepress/plugin-prismjs@^2.0.0-beta.48":
+"@vuepress/plugin-prismjs@2.0.0-beta.48", "@vuepress/plugin-prismjs@^2.0.0-beta.48":
   version "2.0.0-beta.48"
   resolved "https://registry.yarnpkg.com/@vuepress/plugin-prismjs/-/plugin-prismjs-2.0.0-beta.48.tgz#fe4517cd9501aa7f2a03d37c5421bce71e340263"
   integrity sha512-xTdk3DEJmzuzeRcm0fZfJFLs6/oN2T/sm+KtSh7whVbHcgEKFdj0vHkiWswp3bnNWE3FHUwO1UQq9K21zEwpUw==

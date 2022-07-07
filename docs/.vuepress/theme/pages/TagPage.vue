@@ -4,13 +4,14 @@
 </template>
 <script setup>
 import blogJson from '../../blogJson.json';
+import { ref } from 'vue';
 import ArticleListLoad from '../components/ArticleListLoad.vue';
 import Tag from '../components/Tag.vue';
 import { getCookieFeild } from '../../public/js/utils.js'
 
 const tagName = ref(getCookieFeild('tagName'));
 const updateTagName = () => {
-    tagName = ref(getCookieFeild('tagName'));
+    tagName.value = getCookieFeild('tagName');
 }
 </script>
 <style lang="scss" scoped>

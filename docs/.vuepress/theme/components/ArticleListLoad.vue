@@ -6,8 +6,7 @@
                 <div class="tag">
                     <a-tag class="public-tag public-tag-top" color="#000"><i class="iconfont icon-zhiding"></i>置顶
                     </a-tag>
-                    <a-tag v-for="sigTag in article.tag" :key="tag" class="public-tag"
-                        :class="`public-tag-${tag[sigTag].type} ${tag[sigTag].icon}`">{{ sigTag }}</a-tag>
+                    <a-tag v-for="sigTag in article.tag" :key="tag" class="public-tag" :class="`public-tag-${tag[sigTag].type} ${tag[sigTag].icon}`">{{ sigTag }}</a-tag>
                 </div>
                 <span>{{ dayjs(article.date).format('YYYY-MM-DD') }}</span>
             </div>
@@ -24,20 +23,17 @@ import { inject } from 'vue';
 
 const props = defineProps({
     tagName: String
-})
-watch(() => props.tagName, (val) => {
-    console.log(val);
-})
+});
 
 const pageFm = inject('pageFm');
 
 const tag = ref(blogJson.tag);
-const initBlog = ref(blogJson.blog.concat([]));
-const articleList = ref(initBlog.value.splice(0, 10));
+let initBlog = blogJson.blog.concat([]);
+const articleList = ref(initBlog.splice(0, initBlog.length > 10 ? 10 : initBlog.length));
 
 const pageChange = () => {
-    articleList.value = articleList.value.concat(initBlog.value.splice(0, 10));
-}
+    articleList.value = articleList.value.concat(initBlog.splice(0, initBlog.length > 10 ? 10 : initBlog.length));
+};
 
 const scrollEvent = () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -59,19 +55,40 @@ const scrollEvent = () => {
     }
 
     if (thresold > -50 && thresold <= 100) {
-        if (initBlog.value.length != 0) {
+        if (initBlog.length != 0) {
             pageChange();
         }
     }
-}
+};
 
 const globalScrollTop = ref(0);
 window.addEventListener("scroll", scrollEvent);
 
 onUnmounted(() => {
     window.removeEventListener('scroll', scrollEvent);
-})
+});
 
+const articleSearch = (val) => {
+    initBlog = [];
+    articleList.value = [];
+    if (val === '全部') {
+        initBlog = blogJson.blog.concat([]);
+        articleList.value = initBlog.splice(0, initBlog.length > 10 ? 10 : initBlog.length);
+        // articleList.value = blogJson.blog.concat([]);
+    } else {
+        blogJson.blog.forEach(item => {
+            if (item.tag.indexOf(val) > -1) {
+                initBlog.push(item);
+            }
+        });
+        articleList.value = initBlog.splice(0, initBlog.length > 10 ? 10 : initBlog.length);
+    }
+    window.removeEventListener('scroll', scrollEvent);
+    window.addEventListener("scroll", scrollEvent);
+};
+watch(() => props.tagName, (val) => {
+    articleSearch(val);
+}, { immediate: true });
 </script>
 <style lang="scss" scoped>
 .article-content {

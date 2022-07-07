@@ -1,8 +1,8 @@
 <template>
     <div class="card-tag">
         <a-tag v-for="sigTag in tag" :key="tag" class="public-tag"
-            :class="`public-tag-${sigTag.type} ${sigTag.icon} ${pageFm.pageType === 'tagPage' ? 'for-choose' : ''}`"
-            @click="tagClick(sigTag.name)">{{ sigTag.name }}
+            :class="`public-tag-${sigTag.type} ${sigTag.icon} ${pageFm.pageType === 'tagPage' ? 'for-choose' : ''} ${tagName === sigTag.type ? 'active' : ''}`" @click="tagClick(sigTag.name)">
+            {{ sigTag.name }}
         </a-tag>
     </div>
 </template>
@@ -10,7 +10,9 @@
 import blogJson from '../../blogJson.json';
 import { ref, inject } from 'vue';
 import { useRouter } from 'vue-router';
+import { getCookieFeild } from '../../public/js/utils.js'
 
+const tagName = ref(getCookieFeild('tagName'));
 const emits = defineEmits(['updateTagName']);
 
 const router = useRouter();
@@ -19,7 +21,8 @@ const tag = ref(blogJson.tag);
 
 // 点击跳转标签页
 const tagClick = (name) => {
-    document.cookie = `tagName=${name}`;
+    document.cookie = `tagName=${name};path=/`;
+    tagName.value = name;
     if (pageFm.value.pageType === 'tagPage') { // 本页
         emits('updateTagName');
     } else {
@@ -36,7 +39,8 @@ const tagClick = (name) => {
 }
 
 .tagPage .public-tag:hover,
-.tagPage .public-tag:focus {
+.tagPage .public-tag:focus,
+.tagPage .public-tag.active {
     background: #42b983;
     color: #fff;
 }
