@@ -8,7 +8,7 @@
     </div>
 
     <main class="content-wrap">
-        <ArticleList />
+        <ArticleListLoad />
 
 
         <aside class="right-aside">
@@ -65,11 +65,7 @@
                 </a-carousel>
             </div>
 
-            <div class="card-wrap card-tag">
-                <a-tag v-for="sigTag in tag" :key="tag" class="public-tag"
-                    :class="`public-tag-${sigTag.type} ${sigTag.icon}`" @click="tagClick(sigTag.name)">{{ sigTag.name }}
-                </a-tag>
-            </div>
+            <Tag class="card-wrap card-tag" />
         </aside>
     </main>
 
@@ -82,7 +78,8 @@
     </footer>
 </template>
 <script setup>
-import ArticleList from '../components/ArticleList.vue';
+import ArticleListLoad from '../components/ArticleListLoad.vue';
+import Tag from '../components/Tag.vue';
 import { useRouter } from 'vue-router';
 import { onUnmounted, ref, h } from 'vue';
 import blogJson from '../../blogJson.json';
@@ -198,8 +195,6 @@ const openAlipay = () => {
 </script>
 <style lang="scss" scoped>
 .home-page {
-    background: #f4f4f4;
-
     .banner-wrap {
         width: 100%;
         height: 600px;

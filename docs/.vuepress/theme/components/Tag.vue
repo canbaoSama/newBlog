@@ -1,0 +1,43 @@
+<template>
+    <div class="card-tag">
+        <a-tag v-for="sigTag in tag" :key="tag" class="public-tag"
+            :class="`public-tag-${sigTag.type} ${sigTag.icon} ${pageFm.pageType === 'tagPage' ? 'for-choose' : ''}`"
+            @click="tagClick(sigTag.name)">{{ sigTag.name }}
+        </a-tag>
+    </div>
+</template>
+<script setup>
+import blogJson from '../../blogJson.json';
+import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
+
+const emits = defineEmits(['updateTagName']);
+
+const router = useRouter();
+const pageFm = inject('pageFm');
+const tag = ref(blogJson.tag);
+
+// 点击跳转标签页
+const tagClick = (name) => {
+    document.cookie = `tagName=${name}`;
+    if (pageFm.value.pageType === 'tagPage') { // 本页
+        emits('updateTagName');
+    } else {
+        router.push({ path: '/blog/tagPage' });
+    }
+};
+</script>
+<style lang="scss" scoped>
+.card-tag {
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    background: #fff;
+    transition: all 0.3s;
+}
+
+.tagPage .public-tag:hover,
+.tagPage .public-tag:focus {
+    background: #42b983;
+    color: #fff;
+}
+</style>

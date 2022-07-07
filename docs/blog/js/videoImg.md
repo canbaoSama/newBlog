@@ -1,17 +1,12 @@
 ---
 lang: zh-CN
-title: 页面的标题
-description: 页面的描述
+title: 上传视频生成视频封面图展示
+description: 上传视频生成视频封面图展示
 pageClass: blog
 ---
 
 ## 上传视频生成视频封面图展示
-<p class="date">2020/06/20 15:41:20 
-<span id="/blog/js/videoImg.html" class="leancloud_visitors">
-    <i class="shni shn-eye-fill" />
-    <i class="leancloud-visitors-count"></i>
-</span>
-</p>
+<p class="date">2020/06/20 15:41:20 </p>
 
 ### 问题描述
 最近在开发过程中，遇到这样的需求：上传视频并在同一页面的多个模拟机型上展示并播放该视频。
@@ -19,7 +14,7 @@ pageClass: blog
 所以需要思考如何减少视频的加载，保证后续其它的视频都能够走缓存。由于不知道上传的视频加载需要多长事件、所以延迟其它机型的视频加载显然不太现实，所以经过思考，不如换成封面来替代视频，后续点击播放的时候再赋值src。
 
 ##### 利用canvas形成视频封面
-``` JS
+``` js
 const video = document.getElementById('videoPlay');
 const canvas = document.createElement('canvas');
 canvas.width = video.videoWidth; // 这里的宽高可以自己设置决定，建议按照实际需求缩减
@@ -57,14 +52,14 @@ canvas.remove();
 将获取到的视频url贴到一个video标签中，通过video标签的[`loadeddata`](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLMediaElement/loadeddata_event "loadeddata")事件，在加载了第一帧后立刻形成封面图，然后贴到所有video标签的poster属性上。
 
 ***2. canvas数据来源：本地视频数据***
-```
+``` js
 const localUrl = URL.createObjectURL(file);
 ```
 
 以ant-design 的upload组件为例，上传视频后能获取到file信息，然后根据**URL.createObjectURL()**方法获取到本地视频播放地址，贴到video中然后利用canvas生成封面，然后贴到所有video标签的poster属性上。
 
 **URL.createObjectURL()** 获取的url对视频文件的引用会一直存在内存中，只有在页面触发了unload时或者使用 **URL.revokeObjectURL()** 释放后才会从内存清除。所以要使用本地视频数据时，在生成封面图后一定要通过 **URL.revokeObjectURL()** 释放。
-```
+``` js
 // vue3
 const localUrl = ref('');
 localUrl.value = URL.createObjectURL(file);

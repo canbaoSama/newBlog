@@ -1,31 +1,31 @@
 module.exports = [
     {
-        text: '通用',
+        text: 'Javascript',
         collapsible: true,
         children: [
             {
-                text: 'Button 按钮',
-                link: '/components/pages/Button'
+                text: 'Date 日期处理',
+                link: '/notes/js/Date'
             }
         ]
     },
     {
-        text: '数据录入',
+        text: 'css',
         collapsible: true,
         children: [
             {
                 text: 'Slider 滑动组件',
-                link: '/components/pages/Slider'
+                link: '/notes/pages/Slider'
             }
         ]
     },
     {
-        text: '数字输入框',
+        text: 'html',
         collapsible: true,
         children: [
             {
                 text: 'InputNumber 数字输入框',
-                link: '/components/pages/InputNumber'
+                link: '/notes/pages/InputNumber'
             }
         ]
     }

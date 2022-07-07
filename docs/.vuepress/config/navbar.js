@@ -4,8 +4,12 @@ module.exports = [
         link: '/'
     },
     {
-        text: '归档',
-        link: '/components/'
+        text: '笔记',
+        link: '/notes/'
+    },
+    {
+        text: '标签',
+        link: '/blog/tagPage'
     },
     {
         text: '文档',

@@ -1,3 +1,3 @@
 module.exports = {
-  '/components/': require('../../components/sidebar'),
+  '/notes/': require('../../notes/sidebar'),
 }

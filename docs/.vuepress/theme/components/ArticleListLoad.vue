@@ -1,12 +1,13 @@
 <template>
-    <div class="article-content phone-scrollbar">
+    <div class="article-content">
         <div v-for="article in articleList" :key="article.title" class="card-wrap">
-            <p class="title">{{ article.title }}</p>
+            <router-link :to="article.url" class="title">{{ article.title }}</router-link>
             <div class="tag-date">
                 <div class="tag">
                     <a-tag class="public-tag public-tag-top" color="#000"><i class="iconfont icon-zhiding"></i>置顶
                     </a-tag>
-                    <a-tag v-for="sigTag in article.tag" :key="tag" class="public-tag" :class="`public-tag-${tag[sigTag].type} ${tag[sigTag].icon}`">{{ sigTag }}</a-tag>
+                    <a-tag v-for="sigTag in article.tag" :key="tag" class="public-tag"
+                        :class="`public-tag-${tag[sigTag].type} ${tag[sigTag].icon}`">{{ sigTag }}</a-tag>
                 </div>
                 <span>{{ dayjs(article.date).format('YYYY-MM-DD') }}</span>
             </div>
@@ -17,9 +18,16 @@
 </template>
 <script setup>
 import blogJson from '../../blogJson.json';
-import { ref, onUnmounted } from 'vue';
+import { ref, onUnmounted, watch } from 'vue';
 import dayjs from 'dayjs';
 import { inject } from 'vue';
+
+const props = defineProps({
+    tagName: String
+})
+watch(() => props.tagName, (val) => {
+    console.log(val);
+})
 
 const pageFm = inject('pageFm');
 
@@ -63,6 +71,7 @@ window.addEventListener("scroll", scrollEvent);
 onUnmounted(() => {
     window.removeEventListener('scroll', scrollEvent);
 })
+
 </script>
 <style lang="scss" scoped>
 .article-content {
@@ -84,6 +93,11 @@ onUnmounted(() => {
             line-height: 1.5;
             display: block;
             margin-bottom: 4px;
+
+            &:hover,
+            &:focus {
+                color: #42b983;
+            }
         }
 
         .tag-date {

@@ -5,15 +5,24 @@ body {
     color: unset;
 }
 
+.theme-container {
+    background-color: #f4f4f4;
+    &:not(.home) {
+        padding-top: 58px;
+    }
+}
+
 p {
     margin: 0;
 }
 
+// 标签
 .public-tag {
     color: #fff;
     border-radius: 4px;
     height: 22px;
     display: inline-block;
+    cursor: pointer;
     i {
         margin-right: 4px;
     }
@@ -23,39 +32,99 @@ p {
 }
 .public-tag-top {
     margin-right: 24px;
+    &.for-choose {
+        border-color: #000;
+        color: #000;
+        background-color: transparent;
+    }
 }
 .public-tag-vue {
     background-color:  #42b983;
+    &.for-choose {
+        border-color: #42b983;
+        color: #42b983;
+        background-color: transparent;
+    }
 }
 .public-tag-css {
     background-color:  #ef8808;
+    &.for-choose {
+        border-color: #ef8808;
+        color: #ef8808;
+        background-color: transparent;
+    }
 }
 .public-tag-javascript {
     background-color:  #87d068;
+    &.for-choose {
+        border-color: #87d068;
+        color: #87d068;
+        background-color: transparent;
+    }
 }
 .public-tag-applets {
     background-color:  #108ee9;
+    &.for-choose {
+        border-color: #108ee9;
+        color: #108ee9;
+        background-color: transparent;
+    }
 }
 .public-tag-vuepress {
     background-color:  #0a9f46;
+    &.for-choose {
+        border-color: #0a9f46;
+        color: #0a9f46;
+        background-color: transparent;
+    }
 }
 .public-tag-info {
     background-color:  #8b8786;
+    &.for-choose {
+        border-color: #8b8786;
+        color: #8b8786;
+        background-color: transparent;
+    }
 }
 .public-tag-music {
     background-color:  #e6a23c;
+    &.for-choose {
+        border-color: #e6a23c;
+        color: #e6a23c;
+        background-color: transparent;
+    }
 }
 .public-tag-anecdote {
     background-color:  #25bbcb;
+    &.for-choose {
+        border-color: #25bbcb;
+        color: #25bbcb;
+        background-color: transparent;
+    }
 }
 .public-tag-movie {
     background-color:  #8e44ad;
+    &.for-choose {
+        border-color: #8e44ad;
+        color: #8e44ad;
+        background-color: transparent;
+    }
 }
 .public-tag-git {
     background-color:  #f50;
+    &.for-choose {
+        border-color: #f50;
+        color: #f50;
+        background-color: transparent;
+    }
 }
 .public-tag-tool {
     background-color:  #d52104;
+    &.for-choose {
+        border-color: #d52104;
+        color: #d52104;
+        background-color: transparent;
+    }
 }
 
 // 通知框样式
@@ -118,6 +187,24 @@ p {
         }
     }
     .navbar-items a:hover, .navbar-items a.router-link-active {
-        color: #fff;
+        color: unset;
     }
+}
+
+// waline
+.theme-container.blog [data-waline] {
+    width: var(--content-width);
+    margin: 0 auto;
+}
+.theme-container:not(.blog) [data-waline] {
+    padding: 2rem 2.5rem;
+}
+
+.theme-container:not(.blog) .page .theme-default-content {
+    max-width: 100%;
+}
+
+// 代码块样式
+pre, code, kbd, samp {
+    font-size: 12px;
 }

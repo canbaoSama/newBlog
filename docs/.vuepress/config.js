@@ -5,6 +5,7 @@ const { registerComponentsPlugin } = require('@vuepress/plugin-register-componen
 const localTheme = require('./theme').localTheme;
 const { searchPlugin } = require('@vuepress/plugin-search');
 const { backToTopPlugin } = require('@vuepress/plugin-back-to-top');
+const { prismjsPlugin } = require('@vuepress/plugin-prismjs')
 
 module.exports = {
     // 站点配置
@@ -29,7 +30,10 @@ module.exports = {
             componentsDir: path.resolve(__dirname, './components')
         }),
         searchPlugin({}),
-        backToTopPlugin()
+        backToTopPlugin(),
+        prismjsPlugin({
+            preloadLanguages: ['markdown', 'jsdoc', 'yaml']
+        })
     ],
     // 主题和它的配置
     theme: localTheme({

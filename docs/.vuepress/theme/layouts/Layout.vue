@@ -1,13 +1,13 @@
 <template>
-    <!-- <Home /> -->
-    <!-- <NavLinks class="can-hide" /> -->
-
     <ParentLayout>
-        <!-- <template #navbar>
-            <Navbar />
-        </template> -->
         <template v-if="pageFm.pageType === 'home'" #page>
             <Home />
+        </template>
+        <template v-if="pageFm.pageType === 'tagPage'" #page>
+            <TagPage />
+        </template>
+        <template v-if="pageFm.pageType !== 'home'" #page-bottom>
+            <Waline />
         </template>
     </ParentLayout>
 
@@ -19,17 +19,15 @@
 import ParentLayout from '@vuepress/theme-default/lib/client/layouts/Layout.vue';
 import Navbar from '../components/Navbar.vue';
 import Home from '../pages/Home.vue';
+import TagPage from '../pages/TagPage.vue';
 import { usePageFrontmatter } from '@vuepress/client';
 import { provide } from 'vue';
+import Waline from '../components/Waline.vue';
 
 const pageFm = usePageFrontmatter();
 provide('pageFm', pageFm)
 </script>
 <style lang="scss" scoped>
-.home-page {
-    background: #f4f4f4;
-}
-
 .footer-wrap {
     z-index: 9998;
     position: fixed;
