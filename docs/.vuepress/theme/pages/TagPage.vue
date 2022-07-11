@@ -9,14 +9,14 @@ import blogJson from '../../blogJson.json';
 import { ref } from 'vue';
 import ArticleListLoad from '../components/ArticleListLoad.vue';
 import Tag from '../components/Tag.vue';
-import { getCookieFeild } from '../../public/js/utils.js'
+import { getCookieFeild } from '../../public/js/utils.js';
 
 // 恶心人，参数传不过来
-const tagName = ref(getCookieFeild('tagName'));
+const tagName = ref(getCookieFeild('tagName') || 'all');
 document.cookie = `tagName=;path=/`;
 const updateTagName = (val) => {
     tagName.value = val;
-}
+};
 </script>
 <style lang="scss" scoped>
 .tagPage {

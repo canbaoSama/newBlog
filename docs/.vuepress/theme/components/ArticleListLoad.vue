@@ -4,16 +4,15 @@
             <router-link :to="article.url" class="title">{{ article.title }}</router-link>
             <div class="tag-date">
                 <div class="tag">
-                    <a-tag class="public-tag public-tag-top" color="#000"><i class="iconfont icon-zhiding"></i>置顶
-                    </a-tag>
-                    <a-tag v-for="sigTag in article.tag" :key="tag" class="public-tag"
-                        :class="`public-tag-${tag[sigTag].type} ${tag[sigTag].icon}`">{{ sigTag }}</a-tag>
+                    <a-tag v-if="article.top" class="public-tag public-tag-top" color="#000"><i class="iconfont icon-zhiding"></i>置顶 </a-tag>
+                    <a-tag v-for="sigTag in article.tag" :key="tag" class="public-tag" :class="`public-tag-${tag[sigTag].type} ${tag[sigTag].icon}`">{{
+                        sigTag
+                    }}</a-tag>
                 </div>
                 <span>{{ dayjs(article.date).format('YYYY-MM-DD') }}</span>
             </div>
         </div>
-
-        <p class="no-more" v-if="initBlog.length === 0">我也是有底线的~</p>
+        <p class="no-more" v-if="noMore">我也是有底线的~</p>
     </div>
 </template>
 <script setup>
@@ -26,14 +25,21 @@ const props = defineProps({
     tagName: String
 });
 
+// 置顶排序
+blogJson.blog.sort((a, b) => {
+    return !a.top && b.top ? 1 : -1;
+});
+
 const pageFm = inject('pageFm');
 
 const tag = ref(blogJson.tag);
 let initBlog = blogJson.blog.concat([]);
 const articleList = ref(initBlog.splice(0, initBlog.length > 10 ? 10 : initBlog.length));
+const noMore = ref(initBlog.length === 0 ? true : false);
 
 const pageChange = () => {
     articleList.value = articleList.value.concat(initBlog.splice(0, initBlog.length > 10 ? 10 : initBlog.length));
+    noMore.value = initBlog.length === 0;
 };
 
 const scrollEvent = () => {
@@ -49,9 +55,9 @@ const scrollEvent = () => {
 
     if (pageFm.value.pageType === 'home') {
         if (scrollTop > 60) {
-            document.querySelectorAll(".home-page .navbar")[0].setAttribute("class", "navbar home-navbar-scroll");
+            document.querySelectorAll('.home-page .navbar')[0].setAttribute('class', 'navbar home-navbar-scroll');
         } else {
-            document.querySelectorAll(".home-page .navbar")[0].setAttribute("class", "navbar");
+            document.querySelectorAll('.home-page .navbar')[0].setAttribute('class', 'navbar');
         }
     }
 
@@ -63,7 +69,7 @@ const scrollEvent = () => {
 };
 
 const globalScrollTop = ref(0);
-window.addEventListener("scroll", scrollEvent);
+window.addEventListener('scroll', scrollEvent);
 
 onUnmounted(() => {
     window.removeEventListener('scroll', scrollEvent);
@@ -72,23 +78,28 @@ onUnmounted(() => {
 const articleSearch = (val) => {
     initBlog = [];
     articleList.value = [];
-    if (val === '全部' || !val) {
+    if (val === 'all' || !val) {
         initBlog = blogJson.blog.concat([]);
         articleList.value = initBlog.splice(0, initBlog.length > 10 ? 10 : initBlog.length);
     } else {
-        blogJson.blog.forEach(item => {
+        blogJson.blog.forEach((item) => {
             if (item.tag.indexOf(val) > -1) {
                 initBlog.push(item);
             }
         });
         articleList.value = initBlog.splice(0, initBlog.length > 10 ? 10 : initBlog.length);
     }
+    noMore.value = initBlog.length === 0;
     window.removeEventListener('scroll', scrollEvent);
-    window.addEventListener("scroll", scrollEvent);
+    window.addEventListener('scroll', scrollEvent);
 };
-watch(() => props.tagName, (val) => {
-    articleSearch(val);
-}, { immediate: true });
+watch(
+    () => props.tagName,
+    (val) => {
+        articleSearch(val);
+    },
+    { immediate: true }
+);
 </script>
 <style lang="scss" scoped>
 .article-content {

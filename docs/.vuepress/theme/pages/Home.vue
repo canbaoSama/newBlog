@@ -10,7 +10,6 @@
     <main class="content-wrap blog-container">
         <ArticleListLoad />
 
-
         <aside class="right-aside">
             <div class="card-wrap card-info">
                 <div class="avatar-info">
@@ -49,12 +48,11 @@
                     <a-image width="100%" src="https://s2.loli.net/2022/06/23/M1P7YozxsNnklfD.jpg" />
                     <i class="iconfont icon-keaide"></i>
                 </div>
-                <p>{{ loveInfo.daysNum }} 天 {{ loveInfo.hoursNum }} 时 {{ loveInfo.minutesNum }} 分 {{ loveInfo.secondsNum
-                }} 秒 </p>
+                <p>{{ loveInfo.daysNum }} 天 {{ loveInfo.hoursNum }} 时 {{ loveInfo.minutesNum }} 分 {{ loveInfo.secondsNum }} 秒</p>
             </div>
 
             <div class="card-wrap card-carousel">
-                <a-carousel dotPosition="right" autoplay>
+                <a-carousel :dotPosition="carouseType" autoplay>
                     <div v-for="item in carouselInfo" :key="item.title" class="card-carousel-item">
                         <a-image :height="300" :src="item.bg" />
                         <div class="carousel-des">
@@ -89,25 +87,19 @@ const tag = ref(blogJson.tag);
 const router = useRouter();
 const routerLink = (url, query = {}) => {
     router.push({ path: url, query });
-}
+};
 
 // banner 背景图片
-const bgList = [
-    "2Ix4BH1apFwhXqk",
-    "AuHQyJYdVvzNSqT",
-    "CNRGFQvOasBDf7Z",
-    "yzuG2J1TCv3XfS6",
-    "rMNdqIjAXGEsopY",
-];
+const bgList = ['2Ix4BH1apFwhXqk', 'AuHQyJYdVvzNSqT', 'CNRGFQvOasBDf7Z', 'yzuG2J1TCv3XfS6', 'rMNdqIjAXGEsopY'];
 const bannerBg = bgList[Math.floor(Math.random() * 5)];
 
 // 计算恋爱时间
 const loveInfo = ref({
-    deadline: "2022/06/18",
-    daysNum: "∞",
-    hoursNum: "∞",
-    minutesNum: "∞",
-    secondsNum: "∞",
+    deadline: '2022/06/18',
+    daysNum: '∞',
+    hoursNum: '∞',
+    minutesNum: '∞',
+    secondsNum: '∞'
 });
 const loveTime = () => {
     const countDownDate = Date.parse(new Date(loveInfo.value.deadline));
@@ -115,40 +107,44 @@ const loveTime = () => {
         let now = Date.parse(new Date());
         var diff = now - countDownDate;
         loveInfo.value.daysNum = Math.floor(diff / (1000 * 60 * 60 * 24));
-        loveInfo.value.hoursNum = Math.floor(
-            (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-        loveInfo.value.minutesNum = Math.floor(
-            (diff % (1000 * 60 * 60)) / (1000 * 60)
-        );
+        loveInfo.value.hoursNum = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        loveInfo.value.minutesNum = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         loveInfo.value.secondsNum = Math.floor((diff % (1000 * 60)) / 1000);
     }, 1000);
 
     onUnmounted(() => {
         clearInterval(x);
-    })
+    });
 };
 loveTime();
 
 // 走马灯
 const carouselInfo = [
     {
-        title: "日记",
-        content: "做一个热爱生活的人，把生活记录下来。",
-        bg: "https://s2.loli.net/2022/06/23/XNFL8Q4Ah1nuUgx.jpg",
+        title: '日记',
+        content: '做一个热爱生活的人，把生活记录下来。',
+        bg: 'https://s2.loli.net/2022/06/23/XNFL8Q4Ah1nuUgx.jpg'
     },
     {
-        title: "旅行",
-        content:
-            "我认为旅行是从大自然学习的最佳方式。走遍世界，这是我最大的梦想。",
-        bg: "https://s2.loli.net/2022/06/23/4mOBjYVoGzcJkUN.jpg",
+        title: '旅行',
+        content: '我认为旅行是从大自然学习的最佳方式。走遍世界，这是我最大的梦想。',
+        bg: 'https://s2.loli.net/2022/06/23/4mOBjYVoGzcJkUN.jpg'
     },
     {
-        title: "好好打代码",
-        content: "每天都要学习！",
-        bg: "https://s2.loli.net/2022/06/23/DdJVaUg36snwi9I.jpg",
-    },
+        title: '好好打代码',
+        content: '每天都要学习！',
+        bg: 'https://s2.loli.net/2022/06/23/DdJVaUg36snwi9I.jpg'
+    }
 ];
+const carouseType = ref(window.innerWidth > 720 && window.innerWidth < 1200 ? 'bottom' : 'right');
+window.addEventListener('resize', (e) => {
+    console.log(e.target.innerWidth);
+    if (e.target.innerWidth > 720 && e.target.innerWidth < 1200) {
+        carouseType.value = 'bottom';
+    } else {
+        carouseType.value = 'right';
+    }
+});
 
 // 点击跳转标签页
 const tagClick = (name) => {
@@ -159,15 +155,15 @@ const addBookMark = () => {
     notification.open({
         message: '按 CTRL + D 将本页加入书签',
         placement: 'bottomLeft',
-        duration: 2,
+        duration: 2
     });
 };
-// 打开QQ 
+// 打开QQ
 const openQQ = () => {
     notification.open({
         message: 'QQ号：2430980019',
         placement: 'bottomLeft',
-        duration: 0,
+        duration: 0
     });
 };
 // 打开微信
@@ -175,7 +171,7 @@ const openWechat = () => {
     notification.open({
         message: '微信号：yang2430980019',
         placement: 'bottomLeft',
-        duration: 0,
+        duration: 0
     });
 };
 // 打开支付宝
@@ -190,7 +186,6 @@ const openAlipay = () => {
         }
     });
 };
-
 </script>
 <style lang="scss" scoped>
 .home-page {
@@ -259,6 +254,7 @@ const openAlipay = () => {
                     .avatar-info {
                         text-align: center;
                         font-weight: 600;
+                        width: 100%;
                     }
 
                     .data-info {
@@ -316,13 +312,9 @@ const openAlipay = () => {
 
                 &.card-love {
                     text-align: center;
-
                     .avatar-info {
-                        display: flex;
-                        justify-content: center;
                         align-items: center;
                         position: relative;
-                        flex-wrap: wrap;
 
                         img {
                             width: 100%;
@@ -338,7 +330,6 @@ const openAlipay = () => {
                         }
                     }
                 }
-
 
                 &.card-carousel {
                     padding: 0 0;
@@ -379,6 +370,48 @@ const openAlipay = () => {
         .copyright,
         .framework-info {
             text-align: center;
+        }
+    }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1199px) {
+    .home-page .blog-container {
+        flex-direction: column-reverse;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 900px;
+        .right-aside {
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+            margin: 0;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row-reverse;
+            .card-wrap:not(:first-child) {
+                margin-top: 0;
+            }
+            .card-info {
+                flex: 1;
+                margin-right: 24px;
+                margin-bottom: 16px;
+                max-width: 300px;
+                height: 300px;
+            }
+            .card-love {
+                display: none;
+            }
+            .card-carousel {
+                width: 448px;
+                margin-bottom: 16px;
+            }
+            .card-tag {
+                width: 100%;
+                margin-bottom: 48px;
+            }
+        }
+        .article-content {
+            width: 100%;
         }
     }
 }
@@ -437,7 +470,7 @@ const openAlipay = () => {
         color: #fff;
         border: none;
 
-        &>span {
+        & > span {
             opacity: 0;
         }
 

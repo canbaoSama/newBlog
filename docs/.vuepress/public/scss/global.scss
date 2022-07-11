@@ -1,5 +1,8 @@
 @import url('./animate.scss');
 
+$phone: 500px;
+$ipad: 1200px;
+
 body {
     font-size: 16px;
     color: unset;
@@ -18,7 +21,7 @@ p {
 
 // 公共样式
 .blog-container {
-    padding: 30px 24px;
+    padding: 30px 48px;
 }
 @media screen and (orientation: portrait) and (max-width: 720px) {
     .blog-container {

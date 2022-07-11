@@ -18,14 +18,14 @@
             "title": "上传视频生成视频封面图展示1",
             "tag": ["vue"],
             "url": "/blog/js/videoImg.html",
-            "date": "2020/06/21 15:00",
-            "top": true
+            "date": "2020/06/21 15:00"
         },
         {
             "title": "在线工具推荐1",
             "tag": ["工具"],
             "url": "/blog/tool/toolOnline.html",
-            "date": "2020/06/19 15:41"
+            "date": "2020/06/19 15:41",
+            "top": true
         },
         {
             "title": "上传视频生成视频封面图展示2",
@@ -96,8 +96,7 @@
             "title": "上传视频生成视频封面图展示7",
             "tag": ["vue", "css", "javascript", "小程序", "vuepress", "转", "music", "奇闻异事", "movie", "git", "工具"],
             "url": "/blog/js/videoImg.html",
-            "date": "2020/06/21 15:00",
-            "top": true
+            "date": "2020/06/21 15:00"
         },
         {
             "title": "在线工具推荐23237",
