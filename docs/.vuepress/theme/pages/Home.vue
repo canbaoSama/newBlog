@@ -54,7 +54,7 @@
             <div class="card-wrap card-carousel">
                 <a-carousel :dotPosition="carouseType" autoplay>
                     <div v-for="item in carouselInfo" :key="item.title" class="card-carousel-item">
-                        <a-image :height="300" :src="item.bg" />
+                        <a-image :src="item.bg" />
                         <div class="carousel-des">
                             <h2>{{ item.title }}</h2>
                             <p>{{ item.content }}</p>
@@ -138,7 +138,6 @@ const carouselInfo = [
 ];
 const carouseType = ref(window.innerWidth > 720 && window.innerWidth < 1200 ? 'bottom' : 'right');
 window.addEventListener('resize', (e) => {
-    console.log(e.target.innerWidth);
     if (e.target.innerWidth > 720 && e.target.innerWidth < 1200) {
         carouseType.value = 'bottom';
     } else {
@@ -312,6 +311,7 @@ const openAlipay = () => {
 
                 &.card-love {
                     text-align: center;
+
                     .avatar-info {
                         align-items: center;
                         position: relative;
@@ -339,6 +339,10 @@ const openAlipay = () => {
                         position: relative;
                         width: 100%;
                         height: 300px;
+
+                        img {
+                            height: 100%;
+                        }
 
                         .carousel-des {
                             position: absolute;
@@ -380,6 +384,7 @@ const openAlipay = () => {
         flex-wrap: wrap;
         width: 100%;
         max-width: 900px;
+
         .right-aside {
             display: flex;
             width: 100%;
@@ -388,28 +393,34 @@ const openAlipay = () => {
             justify-content: space-between;
             align-items: center;
             flex-direction: row-reverse;
+
             .card-wrap:not(:first-child) {
                 margin-top: 0;
             }
+
             .card-info {
                 flex: 1;
-                margin-right: 24px;
                 margin-bottom: 16px;
                 max-width: 300px;
                 height: 300px;
             }
+
             .card-love {
                 display: none;
             }
-            .card-carousel {
-                width: 448px;
+
+            .card-wrap.card-carousel {
+                flex: 1;
                 margin-bottom: 16px;
+                margin-right: 24px;
             }
+
             .card-tag {
                 width: 100%;
                 margin-bottom: 48px;
             }
         }
+
         .article-content {
             width: 100%;
         }
@@ -428,6 +439,7 @@ const openAlipay = () => {
             display: inline-flex;
             flex-direction: column;
             padding-top: 0;
+            width: 100%;
 
             .article-content {
                 order: 1;
@@ -442,7 +454,10 @@ const openAlipay = () => {
                 display: block;
                 width: 100%;
                 margin-left: 0;
-                margin-top: 20px;
+                margin: 20px auto;
+                &.right-aside {
+                    max-width: 420px;
+                }
             }
         }
     }

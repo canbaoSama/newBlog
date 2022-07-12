@@ -8,25 +8,25 @@ module.exports = [
                 link: '/notes/js/Date'
             }
         ]
-    },
-    {
-        text: 'css',
-        collapsible: true,
-        children: [
-            {
-                text: 'Slider 滑动组件',
-                link: '/notes/pages/Slider'
-            }
-        ]
-    },
-    {
-        text: 'html',
-        collapsible: true,
-        children: [
-            {
-                text: 'InputNumber 数字输入框',
-                link: '/notes/pages/InputNumber'
-            }
-        ]
     }
+    // {
+    //     text: 'css',
+    //     collapsible: true,
+    //     children: [
+    //         {
+    //             text: 'Slider 滑动组件',
+    //             link: '/notes/pages/Slider'
+    //         }
+    //     ]
+    // },
+    // {
+    //     text: 'html',
+    //     collapsible: true,
+    //     children: [
+    //         {
+    //             text: 'InputNumber 数字输入框',
+    //             link: '/notes/pages/InputNumber'
+    //         }
+    //     ]
+    // }
 ];

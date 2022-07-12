@@ -23,11 +23,6 @@ p {
 .blog-container {
     padding: 30px 48px;
 }
-@media screen and (orientation: portrait) and (max-width: 720px) {
-    .blog-container {
-        width: 100%;
-    }
-}
 
 // 标签
 .public-tag {
@@ -226,4 +221,20 @@ p {
 // 代码块样式
 pre, code, kbd, samp {
     font-size: 12px;
+}
+
+@media screen and (orientation: portrait) and (max-width: 720px) {
+    .blog-container {
+        width: 100%;
+        padding: 30px 24px;
+    }
+    .theme-container:not(.blog) [data-waline] {
+        padding: 2rem 1.625rem;
+    }
+}
+
+@media screen and (orientation: portrait) and (max-width: 419px) {
+    .theme-container:not(.blog) [data-waline] {
+        padding: 2rem 1.125rem;
+    }
 }
