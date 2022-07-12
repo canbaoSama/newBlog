@@ -65,6 +65,3 @@ const localUrl = ref('');
 localUrl.value = URL.createObjectURL(file);
 URL.revokeObjectURL(localUrl.value)
 ```
-
-<!-- <base-valine /> -->
-<el-backtop :visibility-height="0"></el-backtop>
