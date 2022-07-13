@@ -6,6 +6,7 @@ const localTheme = require('./theme').localTheme;
 const { searchPlugin } = require('@vuepress/plugin-search');
 const { backToTopPlugin } = require('@vuepress/plugin-back-to-top');
 const { prismjsPlugin } = require('@vuepress/plugin-prismjs');
+const { webpackBundler } = require('@vuepress/bundler-webpack')
 
 module.exports = {
     // 站点配置
@@ -42,5 +43,9 @@ module.exports = {
         sidebar,
         sidebarDepth: 2, // 侧边栏显示2级
         lastUpdated: true
-    })
+    }),
+    bundler: webpackBundler({
+        postcss: {},
+        vue: {},
+    }),
 };
