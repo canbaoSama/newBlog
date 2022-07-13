@@ -7,7 +7,7 @@ import './public/prism/prism.js';
 import './public/prism/prism.css';
 
 export default defineClientConfig({
-    enhance({ app, router, siteData }) {
+    enhance({ app }) {
         app.use(Antd);
     },
     setup() { },
